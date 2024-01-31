@@ -12,4 +12,4 @@ for i in sequence.lower():
         c_t += 1
     elif i == "g":
         c_g = 1
-print("Introduce the sequence:", sequence, "\n Total length:", len(sequence), "\nA:", c_c, "\nC:", c_c
+print("Introduce the sequence:", sequence, "\n Total length:", len(sequence), "\nA:", c_c, "\nC:", c_c"
