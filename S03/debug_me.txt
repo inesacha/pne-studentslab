@@ -1,0 +1,1 @@
+The bug is given by the ZeroDivisionError. To corrected you need to put a try: (...) and except ZeroDivisionError: (...).
