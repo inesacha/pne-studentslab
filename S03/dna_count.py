@@ -1,15 +1,24 @@
 sequence = input("Enter a sequence:")
-c_a = 0
-c_c = 0
-c_t = 0
-c_g = 0
-for i in sequence.lower():
-    if i == "a":
-        c_a += 1
-    elif i == "c":
-        c_c += 1
-    elif i == "t":
-        c_t += 1
-    elif i == "g":
-        c_g = 1
-print("Introduce the sequence:", sequence, "\n Total length:", len(sequence), "\nA:", c_c, "\nC:", c_c"
+dict_dna = {}
+for i in sequence:
+    if i == "A":
+        if i not in dict_dna:
+            dict_dna["A"] = 1
+        else:
+            dict_dna["A"] += 1
+    elif i == "C":
+        if i not in dict_dna:
+            dict_dna["C"] = 1
+        else:
+            dict_dna["C"] += 1
+    elif i == "T":
+        if i not in dict_dna:
+            dict_dna["T"] = 1
+        else:
+            dict_dna["T"] += 1
+    elif i == "G":
+        if i not in dict_dna:
+            dict_dna["G"] = 1
+        else:
+            dict_dna["G"] += 1
+print("Introduce the sequence:", sequence, "\nTotal length:", len(sequence), "\n", dict_dna)
