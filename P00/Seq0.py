@@ -25,7 +25,12 @@ def seq_len(seq):
     list_contents = body.replace("\n", "")
     print("Gene", seq + "-> Length:", len(list_contents))
 
-
+def seq_count_base(seq, base):
+    for g in genes:
+        for b in bases:
+            filename = seq + g + ".txt"
+            bases = seq.read(f)
+            total = seq.read(bases, b)
 
 
 
