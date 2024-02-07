@@ -1,6 +1,6 @@
 from pathlib import Path
 
-FILENAME = "sequences/RNU6_269P.txt"
+FILENAME = "sequences/RNU6_269P.fa"
 
 file_contents = Path(FILENAME).read_text()
 
