@@ -28,7 +28,7 @@ def seq_count_base(bases):
     #for g in genes:
      #   for b in bases:
      #       filename = seq + g + ".txt"
-      #      bases = seq.read(filename)
+      #      bases = seq.read(filename)hh
        #     total = seq.read(bases, b)
 
     for g in bases:
