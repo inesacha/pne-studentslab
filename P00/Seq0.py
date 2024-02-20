@@ -36,25 +36,23 @@ def seq_count_base(bases):
         FILENAME = g + ".fa"
         file_contents = Path(FOLDER + FILENAME).read_text()
         header = file_contents.find("\n")
-        index0.0 = file_contents[header:]
+        index = file_contents[header:]
+        c_a = 0
         c_c = 0
         c_g = 0
-        c_a = 0
         c_t = 0
         for b in index:
             if b == "A":
                 c_a += 1
+            elif b == "C":
+                c_c += 1
             elif b == "G":
                 c_g += 1
             elif b == "T":
                 c_t += 1
-            elif b == "C":
-                c_c += 1
-        print(g, c_c)
-        return
+        print("Gene", g, ":", "\nA:", c_a, "\nC:", c_c, "\nT:", c_c, "\nG:", c_g)
+    return
 
-bases = ["ADA"]
-lol = seq_count_base(bases)
 
 
 
