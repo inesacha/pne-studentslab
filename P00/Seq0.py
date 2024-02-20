@@ -24,34 +24,23 @@ def seq_len(seq):
     list_contents = body.replace("\n", "")
     print("Gene", seq + "-> Length:", len(list_contents))
 
-def seq_count_base(bases):
-    #for g in genes:
-     #   for b in bases:
-     #       filename = seq + g + ".txt"
-      #      bases = seq.read(filename)hh
-       #     total = seq.read(bases, b)
+def seq_count_base (seq, bases):
+    FOLDER = "../sequences/"
+    FILENAME = seq + ".fa"
+    file_contents = Path(FOLDER + FILENAME).read_text()
+    header = file_contents.find("\n")
+    gene = file_contents[header:]
+    answer = {}
+    for g in gene:
+        for b in bases:
+            if g == b:
+                if b not in answer.keys():
+                    answer[b] = 1
+                else:
+                    answer[b] += 1
 
-    for g in bases:
-        FOLDER = "../sequences/"
-        FILENAME = g + ".fa"
-        file_contents = Path(FOLDER + FILENAME).read_text()
-        header = file_contents.find("\n")
-        index = file_contents[header:]
-        c_a = 0
-        c_c = 0
-        c_g = 0
-        c_t = 0
-        for b in index:
-            if b == "A":
-                c_a += 1
-            elif b == "C":
-                c_c += 1
-            elif b == "G":
-                c_g += 1
-            elif b == "T":
-                c_t += 1
-        print("Gene", g, ":", "\nA:", c_a, "\nC:", c_c, "\nT:", c_c, "\nG:", c_g)
-    return
+    print(f"Gene", seq, ":", "\n   A:", answer["A"], "\n   C:", answer["C"], "\n   G:", answer["G"], "\n   T:", answer["T"])
+
 
 
 
