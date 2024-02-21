@@ -31,9 +31,9 @@ print(yourcar.speed)#lo mismo que la linea de abajo, esta linea es como se hace
 #init to moove from class to object, it has to be there
 #self is a parameter of all, its the object itself
 
-class Ferrari(Car):
+class Ferrari(Car): #pones entre parentesis de la clase del que hereda
     def __int__(self): # si estuviese solo el self.music, como la tiene no va a subir, va directamente ahi, tenes musica pero no los otros attribute
-        super().__init__("Ferrari", 100)#y para unir lo que esta arriba y lo que esta abajo
+        super().__init__("Ferrari", 100)#super va para arriba #y para unir lo que esta arriba y lo que esta abajo
         self.music = "classic"
 
 
