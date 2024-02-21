@@ -6,30 +6,23 @@ def seq_ping():
 
 
 def seq_read_fasta(filename):
-    file_contents = Path(filename).read_text()
-    header = file_contents.find("\n")
-    body = file_contents[header:]
-    list_contents = body.replace("\n", "")
-    print("The first 20 bases are:")
-    print(list_contents[:20])
-
-
-def seq_len(seq):
     FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
+    FILENAME = filename + ".fa"
     file_contents = Path(FOLDER + FILENAME).read_text()
     header = file_contents.find("\n")
     body = file_contents[header:]
     list_contents = body.replace("\n", "")
+    return list_contents
+
+
+def seq_len(seq):
+    file_contents = seq_read_fasta(seq)
+    list_contents = file_contents.replace("\n", "")
     print("Gene", seq + "-> Length:", len(list_contents))
 
 
 def seq_count_base(seq, bases):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    header = file_contents.find("\n")
-    gene = file_contents[header:]
+    gene = seq_read_fasta(seq)
     answer = {}
     for g in gene:
         for b in bases:
@@ -41,11 +34,7 @@ def seq_count_base(seq, bases):
     print("Gene", seq, ":", "\n   A:", answer["A"], "\n   C:", answer["C"], "\n   T:", answer["T"], "\n   G:", answer["G"])
 
 def seq_count(seq):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    header = file_contents.find("\n")
-    gene = file_contents[header:]
+    gene = seq_read_fasta(seq)
     d = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
     for g in gene:
         if g == "A":
@@ -60,11 +49,7 @@ def seq_count(seq):
 
 
 def seq_reverse(seq, n):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    header = file_contents.find("\n")
-    gene = file_contents[header + 1:]
+    gene = seq_read_fasta(seq)
     new_fragment = gene[:n]
     reverse_fragment = ""
     for i in reversed(range(20)):
@@ -73,11 +58,7 @@ def seq_reverse(seq, n):
 
 
 def seq_complement(seq):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    header = file_contents.find("\n")
-    gene = file_contents[header + 1:]
+    gene = seq_read_fasta(seq)
     new_fragment = gene[:20]
     complement_fragment = ""
     for g in new_fragment:
@@ -93,11 +74,7 @@ def seq_complement(seq):
 
 
 def processing_the_genes(seq):
-    FOLDER = "../sequences/"
-    FILENAME = seq + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
-    header = file_contents.find("\n")
-    gene = file_contents[header:]
+    gene = seq_read_fasta(seq)
     d = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
     for g in gene:
         if g == "A":

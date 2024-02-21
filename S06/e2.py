@@ -7,6 +7,7 @@ class Seq:
     def len(self):
         return len(self.strbases)
 
+
 def print_seqs(seq_list):
     i = 0
     for s in seq_list:
@@ -14,5 +15,5 @@ def print_seqs(seq_list):
         i += 1
 
 seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
+print_seqs(seq_list)
 
-print(print_seqs(seq_list))
