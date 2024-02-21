@@ -32,7 +32,7 @@ print(yourcar.speed)#lo mismo que la linea de abajo, esta linea es como se hace
 #self is a parameter of all, its the object itself
 
 class Ferrari(Car): #pones entre parentesis de la clase del que hereda
-    def __int__(self): # si estuviese solo el self.music, como la tiene no va a subir, va directamente ahi, tenes musica pero no los otros attribute
+    def __init__(self): # si estuviese solo el self.music, como la tiene no va a subir, va directamente ahi, tenes musica pero no los otros attribute
         super().__init__("Ferrari", 100)#super va para arriba #y para unir lo que esta arriba y lo que esta abajo
         self.music = "classic"
 
@@ -44,7 +44,7 @@ class Ferrari(Car): #pones entre parentesis de la clase del que hereda
 
 mycar = Car("Renault")
 #yourcar = Ferrari() este esta mal porque falta un argument
-yourcar = Ferrari("Ferrari") #como ferrari no tienen init function, va a class car, YOURE USING INHERITANCE
+yourcar = Ferrari() #como ferrari no tienen init function, va a class car, YOURE USING INHERITANCE
 print(yourcar.brand)
 print(yourcar.speed)
 yourcar.set_speed(120)
