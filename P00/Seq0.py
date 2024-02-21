@@ -38,7 +38,6 @@ def seq_count_base (seq, bases):
                     answer[b] = 1
                 else:
                     answer[b] += 1
-
     print(f"Gene", seq, ":", "\n   A:", answer["A"], "\n   C:", answer["C"], "\n   G:", answer["G"], "\n   T:", answer["T"])
 
 
