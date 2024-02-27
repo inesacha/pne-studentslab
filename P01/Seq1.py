@@ -28,7 +28,7 @@ class Seq:
         else:
 
             for b in Seq.bases:
-                return b":"self.strbases.count(b)
+                return "b ":"self.strbases.count(b)
 
 
 class Gene(Seq):
