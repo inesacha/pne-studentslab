@@ -2,10 +2,22 @@ class Seq:
     """A class for representing sequences"""
 
     def __init__(self, strbases):
-        # Initialize the sequence with the value
-        # passed as argument when creating the object
-        self.strbases = strbases
-        print("New sequence created!")
+        count = 0
+        for s in strbases:
+            if s == "A":
+                count += 1
+            elif s == "C":
+                count += 1
+            elif s == "G":
+                count += 1
+            elif s == "T":
+                count += 1
+        if count != len(strbases):
+            self.strbases = "ERROR"
+            print("ERROR!!")
+        else:
+            self.strbases = strbases
+            print("New sequence created!")
 
     def __str__(self):
         """Method called when the object is being printed"""
@@ -15,16 +27,6 @@ class Seq:
     def len(self):
         """Calculate the length of the sequence"""
         return len(self.strbases)
-
-# --- Main program
-s1 = Seq("AGTACACTGGT") #creating 2 objects
-s2 = Seq("CGTAAC")
-
-# -- Printing the objects
-print(f"Sequence 1: {s1}")
-print(f"  Length: {s1.len()}")
-print(f"Sequence 2: {s2}")
-print(f"  Length: {s2.len()}")
 
 
 class Gene(Seq):
@@ -39,14 +41,16 @@ class Gene(Seq):
         super().__init__(strbases)
         self.name = name
         print("New gene created")
+
     def __str__(self):
         """Print the Gene name along with the sequence"""
         return self.name + "-" + self.strbases
 
+
 # --- Main program
-s1 = Seq("AGTACACTGGT")
-g = Gene("CGTAAC", "FRAT1")
+#s1 = Seq("AGTACACTGGT")
+#g = Gene("CGTAAC", "FRAT1")
 
 # -- Printing the objects
-print(f"Sequence 1: {s1}")
-print(f"Gene: {g}")
+#print(f"Sequence 1: {s1}")
+#print(f"Gene: {g}")

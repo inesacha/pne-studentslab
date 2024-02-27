@@ -6,9 +6,9 @@ def seq_ping():
 
 
 def seq_read_fasta(filename):
-    FOLDER = "../sequences/"
-    FILENAME = filename + ".fa"
-    file_contents = Path(FOLDER + FILENAME).read_text()
+    folder = "../sequences/"
+    filename = filename + ".fa"
+    file_contents = Path(folder + filename).read_text()
     header = file_contents.find("\n")
     body = file_contents[header:]
     list_contents = body.replace("\n", "")

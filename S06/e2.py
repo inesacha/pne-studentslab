@@ -1,19 +1,10 @@
-class Seq:
-    def __init__(self, strbases):
-        self.strbases = strbases
-    def __str__(self):
-        return self.strbases
-
-    def len(self):
-        return len(self.strbases)
-
-
+from seq01 import Seq
 def print_seqs(seq_list):
-    i = 0
     for s in seq_list:
-        print(f"Sequence", i, ": (Length:", s.len(), ")", s)
-        i += 1
+        print(f"Sequence {seq_list.index(s)} (Length: {s.len()}) {s}")
 
-seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
+
+
+seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")] #lo de adentro son objetos
 print_seqs(seq_list)
 
