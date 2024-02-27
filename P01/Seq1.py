@@ -22,13 +22,11 @@ class Seq:
             return 0
         return len(self.strbases)
 
-    def count_base(self):
+    def count_base(self, base):
         if self.strbases == "NULL" or self.strbases == "ERROR":
-            return "  A: 0   T: 0   C:0    G:0"
+            return 0
         else:
-
-            for b in Seq.bases:
-                return "b ":"self.strbases.count(b)
+            return self.strbases.count(base)
 
 
 class Gene(Seq):
