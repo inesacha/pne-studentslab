@@ -1,17 +1,16 @@
 from seq01 import Seq
+
+
 def generate_seqs(pattern, number):
     seq_list = []
-    for i in range(1, number +1):
+    for i in range(1, number + 1):
         seq_list.append(Seq(pattern * i))
-
     return seq_list
 
 
 def print_seqs(seq_list):
-    i = 0
     for s in seq_list:
-        print(f"Sequence {i} Length: {s.len()}) {s}")
-        i += 1
+        print(f"Sequence {seq_list.index(s)}: (Length: {s.len()}) {s}")
 
 
 seq_list1 = generate_seqs("A", 3)
