@@ -1,3 +1,4 @@
+from pathlib import Path
 class Seq:
     bases = ['A', 'T', 'C', 'G']
 
@@ -28,6 +29,15 @@ class Seq:
         else:
             return self.strbases.count(base)
 
+    def read_fasta(self, filename):
+        self.filename = filename
+        file_content = Path(filename).read_text()
+        lines = file_content.splitlines()
+        body = lines[1:]
+        dna_sequence = ""
+        for line in body:
+            dna_sequence += line
+        self.strbases = dna_sequence
 
 class Gene(Seq):
     def __init__(self, strbases, name=""):
