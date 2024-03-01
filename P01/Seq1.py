@@ -1,4 +1,6 @@
 from pathlib import Path
+
+
 class Seq:
     bases = ['A', 'T', 'C', 'G']
 
@@ -29,15 +31,77 @@ class Seq:
         else:
             return self.strbases.count(base)
 
+    def count(self):
+        d = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
+        if self.strbases != "NULL" or self.strbases != "ERROR":
+            for g in self.strbases:
+                if g == "A":
+                    d['A'] += 1
+                elif g == "T":
+                    d['T'] += 1
+                elif g == "C":
+                    d['C'] += 1
+                elif g == "G":
+                    d['G'] += 1
+        return d
+
+    def reverse(self):
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return self.strbases
+        else:
+            reverse_fragment = ""
+            for i in reversed(range(len(self.strbases))):
+                reverse_fragment += self.strbases[i]
+            return reverse_fragment
+
+    def complement(self):
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return self.strbases
+        else:
+            complement_fragment = ""
+            for g in self.strbases:
+                if g == "A":
+                    complement_fragment += "T"
+                elif g == "T":
+                    complement_fragment += "A"
+                elif g == "C":
+                    complement_fragment += "G"
+                elif g == "G":
+                    complement_fragment += "C"
+            return complement_fragment
+
     def read_fasta(self, filename):
-        self.filename = filename
-        file_content = Path(filename).read_text()
-        lines = file_content.splitlines()
-        body = lines[1:]
-        dna_sequence = ""
-        for line in body:
-            dna_sequence += line
-        self.strbases = dna_sequence
+        folder = "../sequences/"
+        filename = filename + ".txt"
+        file_contents = Path(folder + filename).read_text()
+        header = file_contents.find("\n")
+        body = file_contents[header:]
+        list_contents = body.replace("\n", "")
+        self.strbases = list_contents
+        return self.strbases
+
+    def processing_the_genes(self, filename):
+        gene = self.read_fasta(filename)
+        d = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
+        for g in gene:
+            if g == "A":
+                d['A'] += 1
+            elif g == "T":
+                d['T'] += 1
+            elif g == "C":
+                d['C'] += 1
+            elif g == "G":
+                d['G'] += 1
+        biggest_value = 0
+        answer = ""
+        for keys in d:
+            if biggest_value < d[keys]:
+                biggest_value = d[keys]
+                answer = keys
+        return answer
+
+
+
 
 class Gene(Seq):
     def __init__(self, strbases, name=""):
