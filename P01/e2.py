@@ -1,4 +1,4 @@
-from Seq1 import Seq
+from P02.Seq1 import Seq
 print("-----| Practice 1, Exercise 2 |------")
 # -- Creating a Null sequence
 s1 = Seq()
