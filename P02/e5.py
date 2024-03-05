@@ -5,8 +5,8 @@ PRACTICE = 2
 EXERCISE = 5
 
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
-IP = "212.128.255.64"
-PORT = 8081
+IP = ""
+PORT = 8080
 c = Client(IP, PORT)
 print(c)
 s = Seq()

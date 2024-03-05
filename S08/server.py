@@ -18,7 +18,7 @@ try:
 
     while True:
         # accept connections from outside
-        print("Waiting for connections at {}, {} ".format(IP, PORT))
+        print(f"Waiting for connections at {IP}, {PORT} ")
         (clientsocket, address) = serversocket.accept()
 
         # Another connection!e
