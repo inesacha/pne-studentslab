@@ -2,7 +2,7 @@ import socket
 
 # Configure the Server's IP and PORT
 PORT = 8081
-IP = "172.17.0.1" # it depends on the machine the server is running
+IP = "" # it depends on the machine the server is running
 MAX_OPEN_REQUESTS = 5
 
 # Counting the number of connections
@@ -25,11 +25,11 @@ try:
         number_con += 1
 
         # Print the connection number
-        print("CONNECTION: {}. From the IP: {}".format(number_con, address))
+        print(f"CONNECTION: {number_con}. From the IP: {address}")
 
         # Read the message from the client, if any
         msg = clientsocket.recv(2048).decode("utf-8")
-        print("Message from client: {}".format(msg))
+        print(f"Message from client: {msg}")
 
         # Send the message
         message = "Hello from the teacher's server\n"
