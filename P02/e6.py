@@ -1,6 +1,5 @@
 from Client0 import Client
 from Seq1 import *
-import os
 PRACTICE = 2
 EXERCISE = 6
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
@@ -14,7 +13,7 @@ c2 = Client(IP, PORT)
 print(c2)
 s = Seq()
 s.read_fasta("FRAT1")
-msg =(f"Sending FRAT1 Gene to the server, in fragments of 10 bases...")
+msg = f"Sending FRAT1 Gene to the server, in fragments of 10 bases..."
 first_message_to_first_server = c1.talk(msg)
 first_message_to_second_server = c2.talk(msg)
 msg2 = str(s)

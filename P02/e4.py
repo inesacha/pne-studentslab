@@ -12,9 +12,8 @@ print(c)
 s = Seq()
 GENES = ["U5", "FRAT1", "ADA"]
 for gene in GENES:
-    filename = os.path.join("..", "sequences", gene + ".txt")
-    s.read_fasta(filename)
-    msg =(f"Sending {gene} Gene to the server...")
+    s.read_fasta(gene)
+    msg = f"Sending {gene} Gene to the server..."
     print(msg)
     first_response = c.talk(msg)
     print(f"From server: {first_response}")

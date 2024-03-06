@@ -2,7 +2,7 @@ import socket
 
 # SERVER IP, PORT
 PORT = 8081
-IP = "212.128.255.88" # it depends on the machine the server is running
+IP = "" # it depends on the machine the server is running
 
 # First, create the socket
 # We will always use these parameters: AF_INET y SOCK_STREAM

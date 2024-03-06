@@ -6,14 +6,16 @@ class Client:
         self.ip = ip
         self.port = port
 
+
     def ping(self):
         print("OK")
 
     def __str__(self):
-        return(f"Connection to SERVER at {self.ip}, PORT: {self.port}")
+        return f"Connection to SERVER at {self.ip}, PORT: {self.port}"
 
     def talk(self, msg):
-        # -- Create the socket
+        #se podria poner tambien el import socket aca nomas, sin ponerlo arriba de todo
+        # -- Create the socket # seria el client socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         # establish the connection to the Server (IP, PORT)
@@ -25,11 +27,8 @@ class Client:
         # Receive data
         response = s.recv(2048).decode("utf-8")
 
-        # Close the socket
+        # Close the socket, cortar la comunicacion, s es un objeto de tipo socket
         s.close()
 
         # Return the response
         return response
-
-
-
