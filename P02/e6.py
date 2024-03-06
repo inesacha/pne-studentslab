@@ -4,12 +4,12 @@ import os
 PRACTICE = 2
 EXERCISE = 6
 print(f"-----| Practice {PRACTICE}, Exercise {EXERCISE} |------")
-IP = "212.128.255.64"
-PORT = 8081
+IP = "10.1.152.112"
+PORT = 8080
 c1 = Client(IP, PORT)
 print(c1)
 PORT = 8081
-IP = "172.17.0.1"
+IP = "10.1.152.112"
 c2 = Client(IP, PORT)
 print(c2)
 s = Seq()
