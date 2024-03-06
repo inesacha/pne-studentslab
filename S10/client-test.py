@@ -3,7 +3,7 @@ import termcolor
 from Client0 import Client
 
 PORT = 8081
-IP = "212.128.255.88" # this IP address is local, so only requests from the same machine are possible
+IP = "127.0.0.1" # this IP address is local, so only requests from the same machine are possible
 
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,7 +15,7 @@ ls.bind((IP, PORT))
 ls.listen()
 
 i = 0
-print("The server is configured!")
+
 number_con = 0
 clients_list = []
 flag = True

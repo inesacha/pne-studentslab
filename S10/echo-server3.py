@@ -2,8 +2,8 @@ import socket
 import termcolor
 from Client0 import Client
 
-PORT = 8081
-IP = "" # this IP address is local, so only requests from the same machine are possible
+PORT = 8080
+IP = "127.0.0.1" # this IP address is local, so only requests from the same machine are possible
 
 # -- Step 1: create the socket
 ls = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
