@@ -71,16 +71,8 @@ class Server:
             print(f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}")
             return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
 
+    def get_function(self):
 
-    def read_fasta(self, filename):
-        folder = "../sequences/"
-        filename = filename + ".txt"
-        file_contents = Path(folder + filename).read_text()
-        header = file_contents.find("\n")
-        body = file_contents[header:]
-        list_contents = body.replace("\n", "")
-        self.strbases = list_contents
-        return self.strbases
 
 
 
