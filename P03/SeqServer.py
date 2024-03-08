@@ -1,5 +1,6 @@
 import socket
 import termcolor
+from pathlib import Path
 
 
 class Server:
@@ -43,6 +44,27 @@ class Server:
         if msg.startswith("PING"):
             termcolor.cprint("PING command!", "green")
             return "OK!\n"
+
+        elif msg.startswith("GET"):
+            which_gene_to_send = msg.split(" ")
+            gene_to_send = which_gene_to_send[1]
+            genes = ['ADA', 'FRAT1', 'FXN', 'U5']
+            i = 0
+            for g in genes:
+                self.read_fasta(g)
+                i += 1
+                if str(i) == gene_to_send:
+                    return g
+
+    def read_fasta(self, filename):
+        folder = "../sequences/"
+        filename = filename + ".txt"
+        file_contents = Path(folder + filename).read_text()
+        header = file_contents.find("\n")
+        body = file_contents[header:]
+        list_contents = body.replace("\n", "")
+        self.strbases = list_contents
+        return self.strbases
 
 
 
