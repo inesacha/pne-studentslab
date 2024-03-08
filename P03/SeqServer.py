@@ -1,6 +1,7 @@
 import socket
 import termcolor
 from pathlib import Path
+from Seq1 import *
 
 
 class Server:
@@ -48,13 +49,28 @@ class Server:
         elif msg.startswith("GET"):
             which_gene_to_send = msg.split(" ")
             gene_to_send = which_gene_to_send[1]
-            genes = ['ADA', 'FRAT1', 'FXN', 'U5']
+            genes = ['ADA', 'FRAT1', 'FXN', 'U5','RNU6_269P']
             i = 0
             for g in genes:
-                self.read_fasta(g)
-                i += 1
                 if str(i) == gene_to_send:
-                    return g
+                    termcolor.cprint("GET", 'green')
+                    print(self.read_fasta(g))
+                    return self.read_fasta(g)
+                i += 1
+
+        elif msg.startswith("INFO"):
+            gene = msg.split(" ")
+            gene = gene[1]
+            seq = Seq(gene)
+            length = f"Total length: {seq.len()}"
+            c_a = f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
+            c_c = f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
+            c_g = f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
+            c_t = f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
+            termcolor.cprint("INFO", 'green')
+            print(f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}")
+            return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
+
 
     def read_fasta(self, filename):
         folder = "../sequences/"
