@@ -71,7 +71,7 @@ class Server:
             print(f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}")
             return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
 
-    def get_function(self):
+    def get_function(self, msg):
 
 
 
