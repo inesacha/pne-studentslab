@@ -20,6 +20,7 @@ class Server:
 
             while True:
                 # accept connections from outside
+                print("SEQ Server configured!")
                 print("Waiting for clients...")
                 (clientsocket, address) = serversocket.accept()
 
@@ -47,32 +48,80 @@ class Server:
             return "OK!\n"
 
         elif msg.startswith("GET"):
-            which_gene_to_send = msg.split(" ")
-            gene_to_send = which_gene_to_send[1]
-            genes = ['ADA', 'FRAT1', 'FXN', 'U5','RNU6_269P']
-            i = 0
-            for g in genes:
-                if str(i) == gene_to_send:
-                    termcolor.cprint("GET", 'green')
-                    print(self.read_fasta(g))
-                    return self.read_fasta(g)
-                i += 1
+                termcolor.cprint("GET", 'green')
+                get = self.get_function(msg)
+                print(get)
+                return get
+
 
         elif msg.startswith("INFO"):
-            gene = msg.split(" ")
-            gene = gene[1]
-            seq = Seq(gene)
-            length = f"Total length: {seq.len()}"
-            c_a = f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
-            c_c = f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
-            c_g = f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
-            c_t = f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
             termcolor.cprint("INFO", 'green')
-            print(f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}")
-            return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
+            info = self.info_function(msg)
+            print(info)
+            return info
+
+        elif msg.startswith("COMP"):
+            termcolor.cprint("COMP", 'green')
+            comp = self.comp_function(msg)
+            print(comp)
+            return comp
+
+        elif msg.startswith("REV"):
+            termcolor.cprint("REV", 'green')
+            rev = self.rev_function(msg)
+            print(rev)
+            return rev
+
+        elif msg.startswith("GENE"):
+            termcolor.cprint("REV", 'green')
+            gene = self.gene_function(msg)
+            print(gene)
+            return gene
+
+
 
     def get_function(self, msg):
+        which_gene_to_send = msg.split(" ")
+        gene_to_send = which_gene_to_send[1]
+        genes = ['ADA', 'FRAT1', 'FXN', 'U5', 'RNU6_269P']
+        i = 0
+        for g in genes:
+            if str(i) == gene_to_send:
+                g = Seq(g)
+                return g.read_fasta(g)
+            i += 1
 
+    def info_function(self, msg):
+        gene = msg.split(" ")
+        gene = gene[1]
+        seq = Seq(gene)
+        length = f"Total length: {seq.len()}"
+        c_a = f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
+        c_c = f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
+        c_g = f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
+        c_t = f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
+        return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
+
+    def comp_function(self, msg):
+        seq = msg.split(" ")
+        seq = seq[1]
+        seq = Seq(seq)
+        comp = seq.complement()
+        return comp
+
+    def rev_function(self, msg):
+        seq = msg.split(" ")
+        seq = seq[1]
+        seq = Seq(seq)
+        rev = seq.reverse()
+        return rev
+
+    def gene_function(self, msg):
+        which_gene_to_send = msg.split(" ")
+        gene_to_send = which_gene_to_send[1]
+        for g in gene_to_send:
+            g = Seq()
+            return g.read_fasta(g)
 
 
 
