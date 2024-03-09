@@ -87,8 +87,8 @@ class Server:
         i = 0
         for g in genes:
             if str(i) == gene_to_send:
-                g = Seq(g)
-                return g.read_fasta(g)
+                seq = Seq(g)
+                return seq.read_fasta(g)
             i += 1
 
     def info_function(self, msg):
@@ -100,7 +100,7 @@ class Server:
         c_c = f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
         c_g = f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
         c_t = f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
-        return f"Sequence: {seq}{length} {c_a}, {c_c}, {c_g}, {c_t}"
+        return f"Sequence: {seq} \n{length} {c_a}, {c_c}, {c_g}, {c_t}"
 
     def comp_function(self, msg):
         seq = msg.split(" ")
@@ -119,10 +119,8 @@ class Server:
     def gene_function(self, msg):
         which_gene_to_send = msg.split(" ")
         gene_to_send = which_gene_to_send[1]
-        for g in gene_to_send:
-            g = Seq()
-            return g.read_fasta(g)
-
+        seq = Seq()
+        return seq.read_fasta(gene_to_send)
 
 
 
