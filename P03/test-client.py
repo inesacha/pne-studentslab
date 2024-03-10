@@ -12,19 +12,19 @@ print("* Testing PING...")
 response = c.talk("PING")
 print(response)
 
-print("\n\n* Testing INFO...")
+print("\n* Testing INFO...")
 response = c.talk("INFO ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA")
 print(f"COMP {response}")
 
-print("\n\n* Testing COMP...")
+print("\n* Testing COMP...")
 response = c.talk("COMP ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCATGGAGGAGAGGTCGTTACGGTTGGGGTCAGGTCCGGGGGTAGGCGGGTCCTAGAGCTAGT")
 print(f"REV {response}")
 
-print("\n\n* Testing REV...")
+print("\n* Testing REV...")
 response = c.talk("REV ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCAACTAGCTCTAGGACCCGCCTACCCCCGGACCTGACCCCAACCGTAACGACCTCTCCTCCA")
 print(response)
 
-print("\n\n* Testing GENE...")
+print("\n* Testing GENE...")
 print("GENE U5")
 response = c.talk("GENE U5")
 print(response)
