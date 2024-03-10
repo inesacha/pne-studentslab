@@ -1,6 +1,5 @@
 import socket
 import termcolor
-from pathlib import Path
 from Seq1 import *
 
 
@@ -121,6 +120,8 @@ class Server:
         gene_to_send = which_gene_to_send[1]
         seq = Seq()
         return seq.read_fasta(gene_to_send)
+
+
 
 
 
