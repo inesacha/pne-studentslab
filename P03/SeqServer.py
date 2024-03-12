@@ -26,7 +26,7 @@ class Server:
                 # Read the message from the client, if any
                 msg = clientsocket.recv(2048).decode("utf-8")
                 # Send the message
-                response = self.what_appears_on_clients(msg)
+                response = self.what_appears_on_clients_and_on_servers(msg)
                 send_bytes = str.encode(response)
                 # We must write bytes, not a string
                 clientsocket.send(send_bytes)
@@ -40,8 +40,7 @@ class Server:
             print("Server stopped by the user")
             serversocket.close()
 
-
-    def what_appears_on_clients(self, msg):
+    def what_appears_on_clients_and_on_servers(self, msg):
         if msg.startswith("PING"):
             termcolor.cprint("PING command!", "green")
             return "OK!\n"
@@ -77,8 +76,6 @@ class Server:
             print(gene)
             return gene
 
-
-
     def get_function(self, msg):
         which_gene_to_send = msg.split(" ")
         gene_to_send = which_gene_to_send[1]
@@ -94,12 +91,12 @@ class Server:
         gene = msg.split(" ")
         gene = gene[1]
         seq = Seq(gene)
-        length = f"Total length: {seq.len()}"
-        c_a = f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
-        c_c = f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
-        c_g = f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
-        c_t = f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
-        return f"Sequence: {seq} \n{length} {c_a}, {c_c}, {c_g}, {c_t}"
+        result = f"Sequence: {seq} \nTotal length: {seq.len()}"
+        result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
+        result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
+        result += f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
+        result += f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
+        return result
 
     def comp_function(self, msg):
         seq = msg.split(" ")
@@ -120,9 +117,6 @@ class Server:
         gene_to_send = which_gene_to_send[1]
         seq = Seq()
         return seq.read_fasta(gene_to_send)
-
-
-
 
 
 c = Server()
