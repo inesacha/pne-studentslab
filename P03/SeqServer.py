@@ -70,7 +70,7 @@ class Server:
             return rev
 
         elif msg.startswith("GENE"):
-            termcolor.cprint("REV", 'green')
+            termcolor.cprint("GENE", 'green')
             gene = self.gene_function(msg)
             print(gene)
             return gene
