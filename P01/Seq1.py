@@ -10,10 +10,10 @@ class Seq:
             print("NULL sequence created")
         else:
             for s in strbases:
-               if s not in Seq.bases:
-                   self.strbases = "ERROR"
-                   print("INVALID sequence!")
-                   return
+                if s not in Seq.bases:
+                    self.strbases = "ERROR"
+                    print("INVALID sequence!")
+                return
             self.strbases = strbases
             print("New sequence created!")
 

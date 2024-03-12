@@ -1,7 +1,7 @@
 import socket
 
 # Configure the Server's IP and PORT
-PORT = 8081
+PORT = 8080
 IP = "212.128.255.88" # it depends on the machine the server is running
 MAX_OPEN_REQUESTS = 5
 
@@ -18,18 +18,18 @@ try:
 
     while True:
         # accept connections from outside
-        print("Waiting for connections at {}, {} ".format(IP, PORT))
+        print(f"Waiting for connections at {IP}, {PORT}")
         (clientsocket, address) = serversocket.accept()
 
         # Another connection!e
         number_con += 1
 
         # Print the connection number
-        print("CONNECTION: {}. From the IP: {}".format(number_con, address))
+        print(f"CONNECTION: {number_con}. From the IP: {address}")
 
         # Read the message from the client, if any
         msg = clientsocket.recv(2048).decode("utf-8")
-        print("Message from client: {}".format(msg))
+        print("Message from client: {msg}")
 
         # Send the message
         message = "Hello from the teacher's server\n"
@@ -39,7 +39,7 @@ try:
         clientsocket.close()
 
 except socket.error:
-    print("Problems using ip {} port {}. Is the IP correct? Do you have port permission?".format(IP, PORT))
+    print(f"Problems using ip {IP} port {PORT}. Is the IP correct? Do you have port permission?")
 
 except KeyboardInterrupt:
     print("Server stopped by the user")

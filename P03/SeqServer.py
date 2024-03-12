@@ -77,45 +77,60 @@ class Server:
 
     def get_function(self, msg):
         which_gene_to_send = msg.split(" ")
-        gene_to_send = which_gene_to_send[1]
-        genes = ['ADA', 'FRAT1', 'FXN', 'U5', 'RNU6_269P']
-        i = 0
-        for g in genes:
-            if str(i) == gene_to_send:
-                seq = Seq(g)
-                return seq.read_fasta(g)
-            i += 1
+        try:
+            gene_to_send = which_gene_to_send[1]
+            genes = ['ADA', 'FRAT1', 'FXN', 'U5', 'RNU6_269P']
+            i = 0
+            for g in genes:
+                if str(i) == gene_to_send:
+                    seq = Seq(g)
+                    return seq.read_fasta(g)
+                i += 1
+        except IndexError:
+            return "Insert a valid sequence"
 
     def info_function(self, msg):
         gene = msg.split(" ")
-        gene = gene[1]
-        seq = Seq(gene) #tenes que pasar por el constructor(llamar al init), seq seria un objeto del tipo que queres importante volverla un objeto de Seq para poder usar los metodos de la clase Seq
-        result = f"Sequence: {seq} \nTotal length: {seq.len()}"
-        result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
-        result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
-        result += f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
-        result += f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
+        try:
+            gene = gene[1]
+            seq = Seq(gene) #tenes que pasar por el constructor(llamar al init), seq seria un objeto del tipo que queres importante volverla un objeto de Seq para poder usar los metodos de la clase Seq
+            result = f"Sequence: {seq} \nTotal length: {seq.len()}"
+            result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / round(seq.len() * 100, 1)}%)"
+            result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / round(seq.len() * 100, 1)}%)"
+            result += f"\nG:{seq.count_base('G')} ({seq.count_base('G') / round(seq.len() * 100, 2)}%)"
+            result += f"\nT:{seq.count_base('T')} ({seq.count_base('T') / round(seq.len() * 100, 2)}%)"
+        except IndexError:
+            result = "Insert a valid sequence"
         return result
 
     def comp_function(self, msg):
         seq = msg.split(" ")
-        seq = seq[1]
-        seq = Seq(seq)
-        comp = seq.complement()
+        try:
+            seq = seq[1]
+            seq = Seq(seq)
+            comp = seq.complement()
+        except IndexError:
+            comp = "Insert a valid sequence"
         return comp
 
     def rev_function(self, msg):
         seq = msg.split(" ")
-        seq = seq[1]
-        seq = Seq(seq)
-        rev = seq.reverse()
+        try:
+            seq = seq[1]
+            seq = Seq(seq)
+            rev = seq.reverse()
+        except IndexError:
+            rev = "Insert a valid sequence"
         return rev
 
     def gene_function(self, msg):
         which_gene_to_send = msg.split(" ")
-        gene_to_send = which_gene_to_send[1]
-        seq = Seq()
-        return seq.read_fasta(gene_to_send)
+        try:
+            gene_to_send = which_gene_to_send[1]
+            seq = Seq()
+            return seq.read_fasta(gene_to_send)
+        except IndexError:
+            return "Insert a valid sequence"
 
 
 c = Server()

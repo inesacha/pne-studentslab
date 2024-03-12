@@ -12,7 +12,7 @@ class Client:
     def __str__(self):
         return f"Connection to SERVER at {self.ip}, PORT: {self.port}"
 
-    def talk(self, msg):
+    def talk(self, msg): #sirve para todos ls clients
         #se podria poner tambien el import socket aca nomas, sin ponerlo arriba de todo
         # -- Create the socket # seria el client socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
