@@ -101,8 +101,6 @@ class Seq:
         return answer
 
 
-
-
 class Gene(Seq):
     def __init__(self, strbases, name=""):
         super().__init__(strbases)

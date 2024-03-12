@@ -51,7 +51,6 @@ class Server:
                 print(get)
                 return get
 
-
         elif msg.startswith("INFO"):
             termcolor.cprint("INFO", 'green')
             info = self.info_function(msg)
@@ -90,7 +89,7 @@ class Server:
     def info_function(self, msg):
         gene = msg.split(" ")
         gene = gene[1]
-        seq = Seq(gene)
+        seq = Seq(gene) #tenes que pasar por el constructor(llamar al init), seq seria un objeto del tipo que queres importante volverla un objeto de Seq para poder usar los metodos de la clase Seq
         result = f"Sequence: {seq} \nTotal length: {seq.len()}"
         result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
         result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"

@@ -6,7 +6,6 @@ class Client:
         self.ip = ip
         self.port = port
 
-
     def ping(self):
         print("OK")
 
