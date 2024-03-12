@@ -78,14 +78,10 @@ class Server:
     def get_function(self, msg):
         which_gene_to_send = msg.split(" ")
         try:
-            gene_to_send = which_gene_to_send[1]
-            genes = ['ADA', 'FRAT1', 'FXN', 'U5', 'RNU6_269P']
-            i = 0
-            for g in genes:
-                if str(i) == gene_to_send:
-                    seq = Seq(g)
-                    return seq.read_fasta(g)
-                i += 1
+            gene_to_send = int(which_gene_to_send[1])
+            genes = ['ACGTTT', 'AAAAGTCGTC', 'ACGTTT', 'ACGTACGTA', 'ACGT']
+            g = genes[gene_to_send]
+            return g
         except IndexError:
             return "Insert a valid sequence"
 
