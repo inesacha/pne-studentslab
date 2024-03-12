@@ -13,7 +13,7 @@ class Seq:
                 if s not in Seq.bases:
                     self.strbases = "ERROR"
                     print("INVALID sequence!")
-                return
+                    return
             self.strbases = strbases
             print("New sequence created!")
 

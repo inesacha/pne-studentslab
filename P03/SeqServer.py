@@ -11,6 +11,7 @@ class Server:
         IP = "127.0.0.1"
         # create an INET, STREAMing socket
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
             serversocket.bind((IP, PORT))
             # become a server socket
@@ -79,7 +80,7 @@ class Server:
         which_gene_to_send = msg.split(" ")
         try:
             gene_to_send = int(which_gene_to_send[1])
-            genes = ['ACGTTT', 'AAAAGTCGTC', 'ACGTTT', 'ACGTACGTA', 'ACGT']
+            genes = ['ACGTTT\n', 'AAAAGTCGTC\n', 'ACGTTT\n', 'ACGTACGTA\n', 'ACGT\n']
             g = genes[gene_to_send]
             return g
         except IndexError:
@@ -91,10 +92,10 @@ class Server:
             gene = gene[1]
             seq = Seq(gene) #tenes que pasar por el constructor(llamar al init), seq seria un objeto del tipo que queres importante volverla un objeto de Seq para poder usar los metodos de la clase Seq
             result = f"Sequence: {seq} \nTotal length: {seq.len()}"
-            result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / round(seq.len() * 100, 1)}%)"
-            result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / round(seq.len() * 100, 1)}%)"
-            result += f"\nG:{seq.count_base('G')} ({seq.count_base('G') / round(seq.len() * 100, 2)}%)"
-            result += f"\nT:{seq.count_base('T')} ({seq.count_base('T') / round(seq.len() * 100, 2)}%)"
+            result += f"\nA:{seq.count_base('A')} ({seq.count_base('A') / seq.len() * 100}%)"
+            result += f"\nC:{seq.count_base('C')} ({seq.count_base('C') / seq.len() * 100}%)"
+            result += f"\nG:{seq.count_base('G')} ({seq.count_base('G') / seq.len() * 100}%)"
+            result += f"\nT:{seq.count_base('T')} ({seq.count_base('T') / seq.len() * 100}%)"
         except IndexError:
             result = "Insert a valid sequence"
         return result

@@ -12,31 +12,27 @@ print("* Testing PING...")
 response = c.talk("PING")
 print(response)
 
+print("* Testing GET...")
+for n in range(5):
+    response = c.talk(f"GET {n}")
+    print(f"GET {n}: {response}")
+
 print("\n* Testing INFO...")
 response = c.talk("INFO ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA")
-print(f"COMP {response}")
+print(f"INFO {response}")
 
 print("\n* Testing COMP...")
 response = c.talk("COMP ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCATGGAGGAGAGGTCGTTACGGTTGGGGTCAGGTCCGGGGGTAGGCGGGTCCTAGAGCTAGT")
-print(f"REV {response}")
+print(f"COMP {response}")
 
 print("\n* Testing REV...")
 response = c.talk("REV ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCAACTAGCTCTAGGACCCGCCTACCCCCGGACCTGACCCCAACCGTAACGACCTCTCCTCCA")
-print(response)
+print(f"REV {response}")
 
 print("\n* Testing GENE...")
-print("GENE U5")
-response = c.talk("GENE U5")
-print(response)
-print("\nGENE ADA")
-response = c.talk("GENE ADA")
-print(response)
-print("\nGENE FRAT1")
-response = c.talk("GENE FRAT1")
-print(response)
-print("\nGENE FXN")
-response = c.talk("GENE FXN")
-print(response)
-print("\nGENE RNU6_269P")
-response = c.talk("GENE RNU6_269P")
-print(response)
+gene = ["U5","ADA", "FRAT1", "FXN", "RNU6_269P"]
+for g in gene:
+    print(f"GENE {g}")
+    response = c.talk(f"GENE {g}")
+    print(response)
+
