@@ -17,7 +17,6 @@ class NumberGuesser:
         elif int(number) > self.secret_number:
             self.attempts.append(number)
             hint = "Lower\n"
-
         return hint
 
 
