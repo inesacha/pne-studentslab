@@ -45,7 +45,7 @@ def process_client(s):
         body = read_html_file("G.html")
     elif "/info/T" in req_line:
         body = read_html_file("T.html")
-    elif "" in req_line:
+    elif "/" in req_line:
         body = Path("html/index.html").read_text()
     else:
         body = Path("html/error.html").read_text()

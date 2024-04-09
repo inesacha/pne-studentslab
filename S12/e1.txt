@@ -1,14 +1,12 @@
 URL: http://127.0.0.1:8080/hello
-1) The request line is
+1) The request line is GET /hello HTTP/1.1
 2) The resource that the client is for is /hello
 URL: http://127.0.0.1:8080/file.html
-1) The request line is /file.html
-2) The resource that the client is for is 127.0.0.1:8080/file.html
+1) The request line is GET /file.html HTTP/1.1
+2) The resource that the client is for is /file.html
 URL: http://127.0.0.1:8080/hi/there?name=virus&type=corona
-1) The request line is /hi/there?name=virus&type=corona
-2) The resource that the client is for is 127.0.0.1:8080/hi/there?name=virus&type=corona
-
-
+1) The request line is GET /hi/there?name=virus&type=corona HTTP/1.1
+2) The resource that the client is for is /hi/there
 
 
 The URL should be  http://127.0.0.1:8080/dna/u5
