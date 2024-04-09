@@ -46,9 +46,9 @@ def process_client(s):
     elif "/info/T" in req_line:
         body = read_html_file("T.html")
     elif "" in req_line:
-        body = read_html_file("index.html")
+        body = Path("html/index.html").read_text()
     else:
-        body = read_html_file("error.html")
+        body = Path("html/error.html").read_text()
 
 
         # -- Status line: We respond that everything is ok (200 code)

@@ -1,6 +1,6 @@
 URL: http://127.0.0.1:8080/hello
-1) The request line is /hello
-2) The resource that the client is for is 127.0.0.1:8080/hello
+1) The request line is
+2) The resource that the client is for is /hello
 URL: http://127.0.0.1:8080/file.html
 1) The request line is /file.html
 2) The resource that the client is for is 127.0.0.1:8080/file.html
