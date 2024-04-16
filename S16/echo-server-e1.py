@@ -27,7 +27,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = Path("html/form-1.html").read_text()
             self.send_response(200)
         elif "/echo?msg=" in self.path:
-            contents = Path("html/form-e1.html").read_text()
+            message = self.path[1:]
+            bien = message[9:]
+            contents = Path("html/form-e1.html").read_text().format(bien)
             self.send_response(200)
         else:
             contents = Path("html/error.html").read_text()
