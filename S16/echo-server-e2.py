@@ -31,7 +31,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             msg = message[message.find("=") + 1: message.find("&")].upper()
             contents = Path("html/form-e1.html").read_text().format(msg)
             self.send_response(200)
-        elif "/myserver?msg=" in self.path:
+        elif self.path.startswith("/myserver?msg=") and self.path.count("=") == 1:
             message = self.path[1:]
             msg = message[message.find("=") + 1:]
             contents = Path("html/form-e1.html").read_text().format(msg)
