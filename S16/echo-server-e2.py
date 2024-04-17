@@ -26,10 +26,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if self.path == "/":
             contents = Path("html/form-e2.html").read_text()
             self.send_response(200)
-        elif "/echo?msg=" in self.path:
+        elif self.path.endswith("&chk=on"):
             message = self.path[1:]
-            bien = message[9:].upper()
-            contents = Path("html/form-e1.html").read_text().format(bien)
+            msg = message[message.find("=") + 1: message.find("&")].upper()
+            contents = Path("html/form-e1.html").read_text().format(msg)
+            self.send_response(200)
+        elif "/myserver?msg=" in self.path:
+            message = self.path[1:]
+            msg = message[message.find("=") + 1:]
+            contents = Path("html/form-e1.html").read_text().format(msg)
             self.send_response(200)
         else:
             contents = Path("html/error.html").read_text()
