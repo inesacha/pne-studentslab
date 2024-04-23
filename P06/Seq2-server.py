@@ -14,18 +14,32 @@ def read_html_file(filename):
     return contents
 
 
+sequences = ["ACGT", "ACCCGGTA", "TACATG", "ACACG", "ACCT"]
+genes = ["ADA", "FRAT1", "FXN", "RNU6_269P", "U5"]
+operations = ["info", "comp", "rev"]
+
+
 class TestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         # Print the request line
         termcolor.cprint(self.requestline, 'green')
         url_path = urlparse(self.path)
-        path = url_path.path  # we get it from here
+        path = url_path.path
         arguments = parse_qs(url_path.query)
         if path == "/":
             contents = Path("html/index.html").read_text()
             self.send_response(200)
-        elif path.startswith("/ping"):
+        elif path == "/ping":
             contents = Path("html/ping.html").read_text()
+            self.send_response(200)
+        elif path == "/get":
+            contents = Path("html/get.html").read_text()
+            self.send_response(200)
+        elif path == "/gene":
+            contents = Path("html/gene.html").read_text()
+            self.send_response(200)
+        elif path == "/operation":
+            contents = Path("html/operation.html").read_text()
             self.send_response(200)
         else:
             contents = Path("html/error.html").read_text()
