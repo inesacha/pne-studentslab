@@ -34,8 +34,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(200)
         elif path == "/get":
             contents = Path("html/get.html").read_text()
+            self.send_response(200)
+        elif path == "/gene":
+            contents = Path("html/gene.html").read_text()
+            self.send_response(200)
         elif path == "/operation":
-            contents = Path("html/operations.html").read_text()
+            contents = Path("html/operation.html").read_text()
+            self.send_response(200)
         else:
             contents = Path("html/error.html").read_text()
             self.send_response(404)
