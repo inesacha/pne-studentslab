@@ -10,8 +10,7 @@
       <h3>Access to server</h3>
       <hr>
        Is the server alive? <input type="submit" value="PING">
-      <hr>
-      <br>
+      <hr><br>
       Get a sequence. Select Sequence Number
       <select name="operation">
         <option value="0">0</option>
@@ -20,8 +19,7 @@
         <option value="3">3</option>
         <option value="4">4</option>
       </select> <input type="submit" value="GET">
-       <br>
-      <br>
+       <br><br>
       Get a Gene. Select the name
       <select name="operation">
         <option value="ADA">ADA</option>
@@ -34,6 +32,13 @@
       <hr>
       Write a sequence:  <input type="text" name="msg">
       <br><br>
+      Select operations:
+      <input type="radio" name="base" value="Info" checked> Info
+      <input type="radio" name="base" value="Comp"> Comp
+      <input type="radio" name="base" value="Rev"> Rev
+      <br><br>
+       Perform operation <input type="submit" value="OPERATE!">
+      <br>
     </form>
   </body>
 </html>
