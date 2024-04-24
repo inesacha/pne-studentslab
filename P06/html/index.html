@@ -14,7 +14,7 @@
     <hr><br>
     <form action="/get" method="get">
       Get a sequence. Select Sequence Number
-      <select name="operation">
+      <select name="number">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -22,10 +22,10 @@
         <option value="4">4</option>
       </select> <input type="submit" value="GET">
        </form>
-    <br><br>
+    <br><hr>
     <form action="/gene" method="get">
       Get a Gene. Select the name
-      <select name="operation">
+      <select name="name">
         <option value="ADA">ADA</option>
         <option value="FRAT1">FRAT1</option>
         <option value="FXN">FXN</option>
@@ -33,14 +33,14 @@
         <option value="U5">U5</option>
       </select> <input type="submit" value="GENE">
       </form>
-      <br><hr>
+      <hr><br>
     <form action="/operation" method="get">
-      Write a sequence:  <input type="text" name="msg">
+      Write a sequence:  <input type="text" name="seq">
       <br><br>
       Select operations:
-      <input type="radio" name="operation" value="Info" checked> Info
-      <input type="radio" name="operation" value="Comp"> Comp
-      <input type="radio" name="operation" value="Rev"> Rev
+      <input type="radio" name="operation" value="info" checked> Info
+      <input type="radio" name="operation" value="comp"> Comp
+      <input type="radio" name="operation" value="rev"> Rev
       <br><br>
        Perform operation <input type="submit" value="OPERATE!">
       <br>
