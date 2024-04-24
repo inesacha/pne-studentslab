@@ -1,8 +1,9 @@
 import http.client
 import json
+import termcolor
 
 SERVER = 'rest.ensembl.org'
-ENDPOINT = '/info/ping'
+ENDPOINT = '/sequence/id/ENSG00000207552'
 PARAMS = '?content-type=application/json'
 URL = SERVER + ENDPOINT + PARAMS
 
@@ -29,8 +30,17 @@ print(f"Response received!: {r1.status} {r1.reason}\n")
 # -- Read the response's body
 data1 = r1.read().decode("utf-8")
 
-ping = json.loads(data1)
+gene = json.loads(data1)
 
 print()
-if ping['ping'] == 1:
-    print("PING OK! The database is running!")
+termcolor.cprint("Gene: ", 'green', end="")
+print("MIR633")
+
+termcolor.cprint("Description: ", 'green', end="")
+print(gene['desc'])
+
+termcolor.cprint("Description: ", 'green', end="")
+print(gene['desc'])
+
+termcolor.cprint("Bases: ", 'green', end="")
+print(gene['seq'])
