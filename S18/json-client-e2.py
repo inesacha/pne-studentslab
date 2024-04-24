@@ -33,27 +33,26 @@ person = json.loads(data1)
 
 print("CONTENT: ")
 
-# Print the information in the object
+peopleNumbers = person['People']
+
+
+termcolor.cprint("Total people in the database: ", 'green', end='')
+print(len(peopleNumbers))
+
+
 print()
-termcolor.cprint("Name: ", 'green', end="")
-print(person['Firstname'], person['Lastname'])
-
-termcolor.cprint("Age: ", 'green', end="")
-print(person['age'])
-
-# Get the phoneNumber list
-phoneNumbers = person['phoneNumber']
-
-# Print the number of elements int the list
-termcolor.cprint("Phone numbers: ", 'green', end='')
-print(len(phoneNumbers))
-
-# Print all the numbers
-for i, num in enumerate(phoneNumbers):
-    termcolor.cprint("  Phone {}:".format(i), 'blue')
-
-    # The element num contains 2 fields: number and type
-    termcolor.cprint("    Type: ", 'red', end='')
-    print(num['type'])
-    termcolor.cprint("    Number: ", 'red', end='')
-    print(num['number'])
+for i, dictnum in enumerate(person['People']):
+    termcolor.cprint("Name: ", 'green', end="")
+    print(person['People'][i]['Firstname'], person['People'][i]['Lastname'])
+    termcolor.cprint("Age: ", 'green', end="")
+    print(person['People'][i]['age'])
+    phoneNumbers = person['People'][i]['phoneNumber']
+    termcolor.cprint("Phone numbers: ", 'green', end='')
+    print(len(phoneNumbers))
+    for i, dictnum in enumerate(phoneNumbers):
+        termcolor.cprint("  Phone " + str(i) + ": ", 'blue')
+        # The element num contains 2 fields: number and type
+        termcolor.cprint("\t Type: ", 'red', end='')
+        print(dictnum['type'])
+        termcolor.cprint("\t Number: ", 'red', end='')
+        print(dictnum['number'])
