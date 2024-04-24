@@ -39,8 +39,6 @@ print("MIR633")
 termcolor.cprint("Description: ", 'green', end="")
 print(gene['desc'])
 
-termcolor.cprint("Description: ", 'green', end="")
-print(gene['desc'])
 
 termcolor.cprint("Bases: ", 'green', end="")
 print(gene['seq'])
