@@ -80,8 +80,7 @@ class Seq:
         self.strbases = list_contents
         return self.strbases
 
-    def processing_the_genes(self, filename):
-        gene = self.read_fasta(filename)
+    def processing_the_genes(self, gene):
         d = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
         for g in gene:
             if g == "A":

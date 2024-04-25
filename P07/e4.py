@@ -16,12 +16,6 @@ genes = {
     "ANK2": "ENSG00000145362"
 }
 
-def info_function(s):
-    result = f"A:{s.count_base('A')} ({s.count_base('A') / s.len() * 100}%)"
-    result += f"\nC:{s.count_base('C')} ({s.count_base('C') / s.len() * 100}%)"
-    result += f"\nG:{s.count_base('G')} ({s.count_base('G') / s.len() * 100}%)"
-    result += f"<br><br>T:{s.count_base('T')} ({s.count_base('T') / s.len() * 100}%)"
-    return result
 
 NAME = str(input("Write the gene name:"))
 SERVER = 'rest.ensembl.org'
@@ -33,7 +27,7 @@ print()
 print(f"Server: {SERVER}")
 print(f"URL : {URL}")
 
-#Connect with the server
+
 conn = http.client.HTTPConnection(SERVER)
 
 
@@ -61,7 +55,18 @@ print(NAME)
 termcolor.cprint("Description: ", 'green', end="")
 print(gene['desc'])
 
-seq = Seq(NAME)
+s = Seq(gene['seq'])
 termcolor.cprint("Total length: ", 'green', end="")
-print(seq.len())
+print(s.len())
 
+termcolor.cprint("A", 'blue', end="")
+print(f": {s.count_base('A')} ({round((s.count_base('A') / s.len() * 100),1)}%)")
+termcolor.cprint("C", 'blue', end="")
+print(f": {s.count_base('C')} ({round((s.count_base('C') / s.len() * 100),1)}%)")
+termcolor.cprint("G", 'blue', end="")
+print(f": {s.count_base('G')} ({round((s.count_base('G') / s.len() * 100),1)}%)")
+termcolor.cprint("T", 'blue', end="")
+print(f": {s.count_base('T')} ({round((s.count_base('T') / s.len() * 100),1)}%)")
+
+termcolor.cprint("Most frequent Base", 'green', end="")
+print(f": {s.processing_the_genes(NAME)}")
