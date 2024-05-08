@@ -25,7 +25,8 @@ def is_request_ok(SERVER, URL):
         connection = http.client.HTTPSConnection(SERVER)
         connection.request("GET", URL)
         response = connection.getresponse()
-        if response.status == 202:
+        print(response.status)
+        if response.status == 200:
             json_str = response.read().decode()
             data = json.loads(json_str)
         else:
@@ -44,15 +45,13 @@ def for_error(path, message):
 
 
 
-
-
 def for_listSpecies(path, parameters):
-    RESOURCE = 'info/species'
+    RESOURCE = '/info/species'
     PARAMETER = '?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
     if error:
-        contents = for_error(path, "Error with Ensembl server")
+        contents = for_error(SERVER, "Error with Ensembl server")
         code = 404
     else:
         limit = None
@@ -63,8 +62,8 @@ def for_listSpecies(path, parameters):
         for s in species[:limit]:
             list_of_species.append(s['display_name'])
         context = {
-            'number_of_species': len(species),
-            'limit': limit,
+            'total_number': len(species),
+            'client_limit': limit,
             'name_species':list_of_species
         }
         contents = read_html_file("species.html").render(context=context)
@@ -73,7 +72,7 @@ def for_listSpecies(path, parameters):
 
 
 
-def for_karyoptype(path, parameters):
+def for_karyotype(path, parameters):
     RESOURCE = 'info/species'
     PARAMETER = '?content-type=application/json'
     URL = RESOURCE + PARAMETER
@@ -87,13 +86,14 @@ def for_karyoptype(path, parameters):
             'specie': species,
             'karyotype': data['karyotype']
         }
-        contents = read_html_file("species.html").render(context=context)
+        contents = read_html_file("karyotype.html").render(context=context)
         code = 202
     return contents, code
 
-def for_chromosome_lenght(parameters):
-
-
+#def for_chromosome_lenght(parameters):
+#al salir de bucle for, controlar si la lenght es None
+#while lenght == None
+#for
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -106,7 +106,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         if path == "/":
             contents = Path("html/index.html").read_text()
         elif path == "/listSpecies":
-            contents = for_listSpecies()
+            contents = for_listSpecies(path, arguments)
         self.send_response(code)
 
 
