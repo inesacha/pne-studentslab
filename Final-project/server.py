@@ -7,8 +7,8 @@ from urllib.parse import parse_qs, urlparse
 import jinja2 as j
 import json
 
-SERVER = 'rest.ensembl.org'
 PORT = 8080
+SERVER = 'rest.ensembl.org'
 socketserver.TCPServer.allow_reuse_address = True
 
 
@@ -20,12 +20,11 @@ def read_html_file(filename):
 
 def is_request_ok(SERVER, URL):
     error = False
-    data = ""
+    data = None
     try:
         connection = http.client.HTTPSConnection(SERVER)
         connection.request("GET", URL)
         response = connection.getresponse()
-        print(response.status)
         if response.status == 200:
             json_str = response.read().decode()
             data = json.loads(json_str)
@@ -44,14 +43,14 @@ def for_error(path, message):
     return read_html_file("error.html").render(context=context)
 
 
-
-def for_listSpecies(path, parameters):
+def for_listSpecies(parameters):
+    ENDPOINT = '/listSpecies'
     RESOURCE = '/info/species'
     PARAMETER = '?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
     if error:
-        contents = for_error(SERVER, "Error with Ensembl server")
+        contents = for_error(ENDPOINT, "Error with Ensemblux server")
         code = 404
     else:
         limit = None
@@ -67,75 +66,86 @@ def for_listSpecies(path, parameters):
             'name_species':list_of_species
         }
         contents = read_html_file("species.html").render(context=context)
-        code = 202
+        code = 200
     return code, contents
 
 
-
-def for_karyotype(path, parameters):
-    RESOURCE = 'info/species'
-    PARAMETER = '?content-type=application/json'
+def for_karyotype(parameters):
+    ENDPOINT = '/karyotype'
+    RESOURCE = '/info/assembly'
+    species = parameters['species'][0]
+    PARAMETER = f'/{species}?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
     if error:
-        contents = for_error(path, "Error with Ensembl server")
+        contents = for_error(ENDPOINT, "Error with Ensembl server")
         code = 404
     else:
-        species = parameters['species'][0]
         context = {
             'specie': species,
             'karyotype': data['karyotype']
         }
         contents = read_html_file("karyotype.html").render(context=context)
-        code = 202
-    return contents, code
+        code = 200
+    return code, contents
 
-#def for_chromosome_lenght(parameters):
-#al salir de bucle for, controlar si la lenght es None
-#while lenght == None
-#for
+
+def for_chromosmeLength(parameters):
+    ENDPOINT = '/chromosomeLength'
+    RESOURCE = '/info/assembly'
+    species = parameters['species'][0]
+    PARAMETER = f'/{species}?content-type=application/json'
+    URL = RESOURCE + PARAMETER
+    error, data = is_request_ok(SERVER, URL)
+    if error:
+        contents = for_error(ENDPOINT, "Error with Ensembl server")
+        code = 404
+    else:
+        chr = data['top_level_region']
+        chromosome = parameters['chr'][0]
+        for c in chr:
+            if c['name'] == chromosome:
+                length = c['length']
+                break
+        context = {
+            'chr': chromosome,
+            'karyotype': length
+        }
+        contents = read_html_file("chromosomeLength.html").render(context=context)
+        code = 200
+    return code, contents
+
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         termcolor.cprint(self.requestline, 'green')
         url_path = urlparse(self.path)
-        path = url_path.path
-        arguments = parse_qs(url_path.query)
+        endpoint = url_path.path
+        parameters = parse_qs(url_path.query)
         code = 200
-        if path == "/":
+        if endpoint == "/":
             contents = Path("html/index.html").read_text()
-        elif path == "/listSpecies":
-            contents = for_listSpecies(path, arguments)
+        elif endpoint == "/listSpecies":
+            code, contents = for_listSpecies(parameters)
+        elif endpoint == "/karyotype":
+            code, contents = for_karyotype(parameters)
+        elif endpoint == "/karyotype":
+            code, contents = for_karyotype(parameters)
+        else:
+            contents = for_error(endpoint, "Error with Ensembleeeee server")
+            code = 404
+
         self.send_response(code)
-
-
-        # Define the content-type header:
         self.send_header('Content-Type', 'text/html')
-        self.send_header('Content-Length', len(str.encode(contents)))
-
-        # The header is finished
+        self.send_header('Content-Length', str(len(contents.encode())))
         self.end_headers()
-
-        # Send the response message
         self.wfile.write(contents.encode())
-
         return
 
-# ------------------------
-# - Server MAIN program
-socketserver.TCPServer.allow_reuse_address = True
-# ------------------------
-# -- Set the new handler
-Handler = TestHandler
 
-# -- Open the socket server
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-
+with socketserver.TCPServer(("", PORT), TestHandler) as httpd:
     print("Serving at PORT", PORT)
-
-    # -- Main loop: Attend the client. Whenever there is a new
-    # -- clint, the handler is called
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
