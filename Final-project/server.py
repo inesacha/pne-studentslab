@@ -49,10 +49,9 @@ def for_listSpecies(parameters):
     PARAMETER = '?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
-    if error:
-        contents = for_error(ENDPOINT, "Not a real number. Please try again")
-        code = 404
-    else:
+    contents = for_error(ENDPOINT, "Not a real number. Please try again")
+    code = 404
+    if not error:
         limit = None
         if 'limit' in parameters:
             limit = int(parameters['limit'][0])
@@ -77,10 +76,9 @@ def for_karyotype(parameters):
     PARAMETER = f'/{species}?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
-    if error:
-        contents = for_error(ENDPOINT, f"{species} doesn't exist. Please try again.")
-        code = 404
-    else:
+    contents = for_error(ENDPOINT, f"{species} doesn't exist. Please try again.")
+    code = 404
+    if not error:
         context = {
             'specie': species,
             'karyotype': data['karyotype']
@@ -97,10 +95,9 @@ def for_chromosomeLength(parameters):
     PARAMETER = f'/{species}?content-type=application/json'
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
-    if error:
-        contents = for_error(ENDPOINT, "Error with Ensembl server to find the chromosome you are looking for. Please try again.")
-        code = 404
-    else:
+    contents = for_error(ENDPOINT, "Error with Ensembl server to find the chromosome you are looking for. Please try again.")
+    code = 404
+    if not error:
         chr = data['top_level_region']
         chromosome = parameters['chromo'][0]
         length = None
@@ -132,14 +129,13 @@ def for_geneSeq(parameters):
     RESOURCE = '/sequence/id'
     gene = parameters['gene'][0]
     id = for_geneID(gene)
+    contents = for_error(ENDPOINT,"Error with Ensembl server to return the sequence of the human gene that you are looking for. Please try again.")
+    code = 404
     if not id is None:
         PARAMETER = f'/{id}?content-type=application/json'
         URL = RESOURCE + PARAMETER
         error, data = is_request_ok(SERVER, URL)
-        if error:
-            contents = for_error(ENDPOINT,"Error with Ensembl server to return the sequence of the human gene that you are looking for. Please try again.")
-            code = 404
-        else:
+        if not error:
             seq = data['seq']
             context = {
                     'gene': gene,
@@ -154,14 +150,13 @@ def for_geneInfo(parameters):
     RESOURCE = '/overlap/id'
     gene = parameters['gene'][0]
     id = for_geneID(gene)
-    if not id is None:
+    contents = for_error(ENDPOINT,"Error with Ensembl server to return information about the sequence of a human gene that you are looking for. Please try again.")
+    code = 404
+    if id is not None:
         PARAMETER = f'/{id}?content-type=application/json;feature=gene'
         URL = RESOURCE + PARAMETER
         error, data = is_request_ok(SERVER, URL)
-        if error:
-            contents = for_error(ENDPOINT,"Error with Ensembl server to return information about the sequence of a human gene that you are looking for. Please try again.")
-            code = 404
-        else:
+        if not error:
             data = data[0]
             name = data['assembly_name']
             start = data['start']
@@ -184,14 +179,13 @@ def for_geneCalc(parameters):
     RESOURCE = '/sequence/id'
     gene = parameters['gene'][0]
     id = for_geneID(gene)
+    contents = for_error(ENDPOINT,"Error with Ensembl server to perform calculations about the sequence of the human gene that you are looking for. Please try again.")
+    code = 404
     if not id is None:
         PARAMETER = f'/{id}?content-type=application/json'
         URL = RESOURCE + PARAMETER
         error, data = is_request_ok(SERVER, URL)
-        if error:
-            contents = for_error(ENDPOINT,"Error with Ensembl server to perform calculations about the sequence of the human gene that you are looking for. Please try again.")
-            code = 404
-        else:
+        if not error:
             seq = data['seq']
             s = Seq(seq)
             context = {
@@ -209,21 +203,23 @@ def for_geneCalc(parameters):
 def for_geneList(parameters):
     ENDPOINT = '/geneList'
     RESOURCE = '/overlap/region/human'
-    chromo = parameters['chromo']
+    chromo = int(parameters['chromo'][0])
     start = int(parameters['start'][0])
     end = int(parameters['end'][0])
     PARAMETER = f"/{chromo}:{start}-{end}?content-type=application/json;feature=gene"
     URL = RESOURCE + PARAMETER
     error, data = is_request_ok(SERVER, URL)
-    if error:
-        contents = for_error(ENDPOINT,"Error with Ensembl server to return the names of the genes located in the chromosome that you are looking for. Please try again.")
-        code = 404
-    else:
+    contents = for_error(ENDPOINT,"Error with Ensembl server to return the names of the genes located in the chromosome that you are looking for. Please try again.")
+    code = 404
+    if not error:
         list_of_genes_name = []
         for d in data:
             if 'external_name' in d:
                 list_of_genes_name.append(d['external_name'])
         context = {
+                'chromo': chromo,
+                'start': start,
+                'end': end,
                 'list': list_of_genes_name,
             }
         contents = read_html_file("list.html").render(context=context)

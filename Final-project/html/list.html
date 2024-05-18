@@ -5,8 +5,9 @@
     <title>Gene List</title>
 </head>
 <body style="background: lightgreen">
+    <h1>The names of the genes located in the chromosome {{context.chromo}} from {{context.start}} to {{context.end}} are:</h1>
     <ul>
-        {% for l in list: %}
+        {% for l in context.list: %}
         <li>{{l}}</li>
         {% endfor %}
     </ul>
