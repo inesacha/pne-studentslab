@@ -25,6 +25,33 @@
         <label>Select the species:</label><input type="text" name="species"><br>
         <label>Select a chromosome:</label><input type="text" name="chr"><br>
         <input type="submit" value="Send">
-        </form>
+    </form>
+
+    <form action="/geneSeq" method="get">
+        <p>4) Human gene sequence</p>
+        <label>Select the gene:</label><input type="text" name="gene"><br>
+        <input type="submit" value="Send">
+    </form>
+
+    <form action="/geneInfo" method="get">
+        <p>5) Information about a human gene </p>
+        <label>Select the gene:</label><input type="text" name="gene"><br>
+        <input type="submit" value="Send">
+    </form>
+
+    <form action="/geneCalc" method="get">
+        <p>6) Calculations on a human gene </p>
+        <label>Select the gene:</label><input type="text" name="gene"><br>
+        <input type="submit" value="Send">
+    </form>
+
+
+    <form action="/geneList" method="get">
+        <p>7) List of the names of the genes located in a chromosome</p>
+        <label>Select the chromosome:</label><input type="text" name="chromo"><br>
+        <label>Select the start:</label><input type="text" name="start"><br>
+        <label>Select the end:</label><input type="text" name="end"><br>
+        <input type="submit" value="Send">
+    </form>
 </body>
 </html>`
