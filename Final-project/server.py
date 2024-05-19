@@ -181,7 +181,7 @@ def for_geneCalc(parameters):
     id = for_geneID(gene)
     contents = for_error(ENDPOINT,"Error with Ensembl server to perform calculations about the sequence of the human gene that you are looking for. Please try again.")
     code = 404
-    if not id is None:
+    if id is not None:
         PARAMETER = f'/{id}?content-type=application/json'
         URL = RESOURCE + PARAMETER
         error, data = is_request_ok(SERVER, URL)
