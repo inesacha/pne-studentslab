@@ -17,8 +17,7 @@ def seq_read_fasta(filename):
 
 def seq_len(seq):
     file_contents = seq_read_fasta(seq)
-    list_contents = file_contents.replace("\n", "")
-    print("Gene", seq + "-> Length:", len(list_contents))
+    print("Gene", seq + "-> Length:", len(file_contents))
 
 
 def seq_count_base(seq, bases):

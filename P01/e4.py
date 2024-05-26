@@ -1,4 +1,4 @@
-from P02.Seq1 import Seq
+from Seq1 import Seq
 print("-----| Practice 1, Exercise 4 |------")
 s1 = Seq()
 s2 = Seq("ACTGA")
