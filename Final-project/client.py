@@ -6,6 +6,7 @@ PORT = 8080
 
 conn = http.client.HTTPConnection(SERVER, port=PORT)
 
+
 #listspecies
 try:
     conn.request("GET", "/listSpecies?limit=10&json=1")
